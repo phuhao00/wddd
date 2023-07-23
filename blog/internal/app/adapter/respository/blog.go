@@ -8,9 +8,9 @@ import (
 	"gorm.io/gorm"
 )
 
-type Blog struct{}
+type BlogRepo struct{}
 
-func (b *Blog) Update(post *valueobject.Post) {
+func (b *BlogRepo) UpdatePost(post *valueobject.Post) {
 	db := mysql.Connection()
 	err := db.Transaction(func(tx *gorm.DB) error {
 		var err error
@@ -25,7 +25,7 @@ func (b *Blog) Update(post *valueobject.Post) {
 	}
 }
 
-func (b *Blog) Get(id string) *valueobject.Post {
+func (b *BlogRepo) GetPost(id string) *valueobject.Post {
 	db := mysql.Connection()
 	var post model.Post
 	db.Exec("select * from post where id=?", id).Find(&post)
@@ -36,7 +36,7 @@ func (b *Blog) Get(id string) *valueobject.Post {
 	}
 }
 
-func (b *Blog) Delete(id string) {
+func (b *BlogRepo) DeletePost(id string) {
 	db := mysql.Connection()
 	db.Exec("delete from post where id=?", id)
 }

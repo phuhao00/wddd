@@ -11,9 +11,9 @@ import (
 
 // Connection gets connection of mysql database
 func Connection() (db *gorm.DB) {
-	host := viper.Get("PGHOST")
-	user := viper.Get("PGUSER")
-	pass := viper.Get("PGPASSWORD")
+	host := viper.Get("HOST")
+	user := viper.Get("USER")
+	pass := viper.Get("PASSWORD")
 	dsn := fmt.Sprintf("host=%v user=%v password=%v", host, user, pass)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
